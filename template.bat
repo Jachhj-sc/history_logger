@@ -15,12 +15,20 @@ if %errorlevel% == 0 (
 :admin
 :: Your script's admin commands go here
 
-reg delete "HKCU\Environment" /v SSLKEYLOGFILE /f
-echo SSLKEYLOGFILE cleared
-echo SSLKEYLOGFILE cleared > ..\sslkeylog_path.txt
-echo.
-echo Done
+:auto_install?
+	set /p choice="Do you want to install automatically? (Y/n): "
+	if /i "%choice%"=="y" (
+		echo Automatic installation started.
+	) else if /i "%choice%"=="n" (
+		echo Manual installation started.
+	) else (
+		echo Invalid choice. Please enter 'y' or 'n'.
+		pause
+		goto :auto_install?
+	)
+	
 pause
+
 exit /b
 
 :elevate

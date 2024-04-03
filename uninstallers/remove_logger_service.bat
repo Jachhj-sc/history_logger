@@ -5,26 +5,22 @@ cd /d "%~dp0"
 :: Check for administrative privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
-    echo Running with administrative privileges
+    ::echo Running with administrative privileges
     goto :admin
 ) else (
-    echo Requesting administrative privileges...
+    ::echo Requesting administrative privileges...
     goto :elevate
 )
 
 :admin
 :: Your script's admin commands go here
-echo Performing admin tasks...
 
-:: as background to avoid blocking the script
-start /b .\set_sslcapt_file.bat
-timeout /t 3 /nobreak >nul
-echo wrote SSLKEYLOGFILE: %SSLKEYLOGFILE%
-echo %SSLKEYLOGFILE% > .\sslkeylog_path.txt
+::delete logger service
+
+echo.
 echo Done
-
 pause
-exit
+exit /b
 
 :elevate
 :: Self-elevate the script
