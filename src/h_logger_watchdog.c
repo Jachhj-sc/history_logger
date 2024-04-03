@@ -95,15 +95,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pCmdLine, 
 			char systemcall[256];
             int result = 0;
 
-            result = sprintf_s(systemcall, sizeof(systemcall), "%s", __argv[1]);//start /b 
+            result = sprintf_s(systemcall, sizeof(systemcall), "%s", __argv[1]);
             
             if (result > 0) {
                 ShellExecute(NULL, "open", systemcall, NULL, NULL, SW_HIDE);// to open hidden
-            } else {
-                // printf("Error starting %s\n", __argv[1]);
             }
-        } else {
-            // printf("%s is running.\n", __argv[1]);
         }
         Sleep(interval); // Check every 5 seconds
     }

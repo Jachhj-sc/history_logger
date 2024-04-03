@@ -1,0 +1,20 @@
+SSLKEYLOGFILE in env vars
+batch
+	setx SSLKEYLOGFILE "C:\sslkeys.log"
+verify
+	echo %SSLKEYLOGFILE%
+
+set wireshark to use log file to decrypt
+
+destination ip resolve:
+in wireshark
+edit pref nameresolution resolve network ip adresses
+
+filter for http.request.uri.path	
+
+
+filter for duckduck go searches:
+		ip.dst_host contains "duck" && (http.request.uri contains "q=" || http2.header.value contains "/?q=")
+
+filter for google searches:
+		ip.dst_host contains "google" && http2.header.value ~ "/search?q="

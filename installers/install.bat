@@ -24,17 +24,19 @@ setlocal enabledelayedexpansion
 set "sslkeylog_path=%HOMEDRIVE%\tmp"
 set "sslkeylog_file=sslkeys.log"
 
+set "sslkeylog_path_file=sslkeylog_path.txt"
+
+set "wireshark_path=%HOMEDRIVE%\Program Files\Wireshark"
+
 set "historylog_path=%HOMEDRIVE%\tmp\history"
 set "historylog_file=history.log"
 set "auto_install=false"
 
-set "h_logger_bin_path=%HOMEDRIVE%\Program Files\h_logger\bin"
+set "h_logger_install_bin_path=%HOMEDRIVE%\Program Files\h_logger\bin"
 
 set "bins_path=..\bins"
-set "noshell_helper=noshell.vbs"
 set "logger_service_executable=h_logger.exe"
 set "logger_service_watchdog=h_logger_watchdog.exe"
-set "silent_watchdog_starter=start_watchdog_silent.bat"
 
 ::set "logger_service_watchdog_watchdog=h_logger_watchdog_watchdog.exe"
 
@@ -155,18 +157,18 @@ IF EXIST "%HOMEDRIVE%\Program Files\Wireshark\tshark.exe" (
 :historylog_auto_install
 	echo Installation of the history log service started.
 
-	IF EXIST "%h_logger_bin_path%" (
-		echo Directory "%h_logger_bin_path%" exists.
+	IF EXIST "%h_logger_install_bin_path%" (
+		echo Directory "%h_logger_install_bin_path%" exists.
 	) ELSE (
-		echo Directory "%h_logger_bin_path%" does not exist.
-		mkdir "%h_logger_bin_path%"
-		echo Directory "%h_logger_bin_path%" created.
+		echo Directory "%h_logger_install_bin_path%" does not exist.
+		mkdir "%h_logger_install_bin_path%"
+		echo Directory "%h_logger_install_bin_path%" created.
 	)
 
 ::copy binaries to bin path
 	IF EXIST "%bins_path%\%logger_service_executable%" (
 		echo service in "%bins_path%" exists.
-		copy "%bins_path%\%logger_service_executable%" "%h_logger_bin_path%"
+		copy "%bins_path%\%logger_service_executable%" "%h_logger_install_bin_path%"
 	) ELSE (
 		echo service in "%bins_path%" does not exist. FATAL ERROR! contact developer.
 		goto :end
@@ -174,26 +176,24 @@ IF EXIST "%HOMEDRIVE%\Program Files\Wireshark\tshark.exe" (
 
 	IF EXIST "%bins_path%\%logger_service_watchdog%" (
 		echo service_watchdog in "%bins_path%" exists.
-		copy "%bins_path%\%logger_service_watchdog%" "%h_logger_bin_path%"
+		copy "%bins_path%\%logger_service_watchdog%" "%h_logger_install_bin_path%"
 	) ELSE (
 		echo service_watchdog in "%bins_path%" does not exist. FATAL ERROR! contact developer.
 		goto :end
 	)
 
-	IF EXIST "%bins_path%\%noshell_helper%" (
-		echo noshell helper in "%bins_path%" exists.
-		copy "%bins_path%\%noshell_helper%" "%h_logger_bin_path%"
-	) ELSE (
-		echo noshell helper in "%bins_path%" does not exist. FATAL ERROR! contact developer.
-		goto :end
-	)
-
 :: add bin path to the system PATH variable
-	call "%bins_path%\append_to_path.exe" "%h_logger_bin_path%"
+	call "%bins_path%\append_to_path.exe" "%h_logger_install_bin_path%"
+	call "%bins_path%\append_to_path.exe" "%wireshark_path%"
+
+	echo.
+	echo writing sslkeylog path to files...
+	echo %SSLKEYLOGFILE% > %sslkeylog_path_file%
+	copy "%sslkeylog_path_file%" "%h_logger_install_bin_path%"
 
 :: create service_watchdog task
-	::schtasks /create /tn "h_logger Watchdog" /tr "wscript.exe //b \"%h_logger_bin_path%\%noshell_helper%\" \"%h_logger_bin_path%\%logger_service_watchdog%\" \"%logger_service_executable%\" \"60000\" \"%h_logger_bin_path%\%noshell_helper%\"" /sc ONLOGON /rl HIGHEST /ru "%USERNAME%"
-	schtasks /create /tn "h_logger Watchdog" /tr "\"%h_logger_bin_path%\%logger_service_watchdog%\" \"%logger_service_executable%\" \"30000\"" /sc ONLOGON /rl HIGHEST /ru "%USERNAME%"
+	::schtasks /create /tn "h_logger Watchdog" /tr "wscript.exe //b \"%h_logger_install_bin_path%\%noshell_helper%\" \"%h_logger_install_bin_path%\%logger_service_watchdog%\" \"%logger_service_executable%\" \"60000\" \"%h_logger_install_bin_path%\%noshell_helper%\"" /sc ONLOGON /rl HIGHEST /ru "%USERNAME%"
+	schtasks /create /tn "h_logger Watchdog" /tr "\"%h_logger_install_bin_path%\%logger_service_watchdog%\" \"%logger_service_executable%\" \"30000\"" /sc ONLOGON /rl HIGHEST /ru "%USERNAME%"
 	schtasks /run /tn "h_logger Watchdog"
 
 	echo.
