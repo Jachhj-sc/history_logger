@@ -11,9 +11,9 @@ always make sure you have a backup.
 
 # Disclaimer for history_logger
 
-I, Jachhj-sc, provide the [Project Name] weblogger as open-source under the Creative Commons Attribution-NonCommercial 4.0 International License. This software is offered "as is" without any warranty. I am not liable for any damages or issues that arise from using this software.
+I, Jachhj-sc, provide the history_logger weblogger as open-source under the Creative Commons Attribution-NonCommercial 4.0 International License. This software is offered "as is" without any warranty. I am not liable for any damages or issues that arise from using this software.
 
-Using [Project Name] means you understand I, Jachhj-sc, am not responsible for any direct, indirect, or other types of losses related to the use of this software. This includes, but is not limited to, loss of profits, data, or any possible damages.
+Using history_logger means you understand I, Jachhj-sc, am not responsible for any direct, indirect, or other types of losses related to the use of this software. This includes, but is not limited to, loss of profits, data, or any possible damages.
 
 This software should not be used for illegal purposes, and I am not responsible for misuse of the software in such ways. It’s your responsibility to follow the law when using this software.
 
