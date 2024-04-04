@@ -1,12 +1,14 @@
 # History Logger
 
-History logger is a project, that aims to make logging of web addresses including SSL/TLS encrypted traffic easy.
+History logger is a project, that aims to make logging of web addresses including SSL/TLS encrypted traffic easy.  
 
-it works for all chromium based browsers, Firefox and all the other browsers/programs that support SSLKEYLOGFILE environment variable.
+it works for all chromium based browsers, Firefox and all the other browsers/programs that support SSLKEYLOGFILE environment variable.  
 
-this project is in early stages and may contains bugs. and can potentially breakyyour windows installation.
+## WARNING! 
+This project is in early stages and may contains bugs. and can potentially break your windows installation.  
+always make sure you have a backup.  
 
-always make sure you have a backup.
+also because it is in early stages and I dont have much time, the project might be very messy and confusing. my apologies for this. I am planning to improve this soon.
 
 ## usage info
 look here for important information for using the project: [project usage](/usage.md)
