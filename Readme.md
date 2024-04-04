@@ -8,7 +8,8 @@ this project is in early stages and may contains bugs. and can potentially break
 
 always make sure you have a backup.
 
-
+## usage info
+look here for important information for using the project: [project usage](/usage.md)
 # Disclaimer for history_logger
 
 I, Jachhj-sc, provide the history_logger weblogger as open-source under the Creative Commons Attribution-NonCommercial 4.0 International License. This software is offered "as is" without any warranty. I am not liable for any damages or issues that arise from using this software.
