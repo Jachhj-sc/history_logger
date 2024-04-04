@@ -1,1 +1,1 @@
-C:\tmp\sslkeys.log 
+SSLKEYLOGFILE cleared 

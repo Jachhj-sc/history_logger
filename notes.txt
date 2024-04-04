@@ -18,3 +18,22 @@ filter for duckduck go searches:
 
 filter for google searches:
 		ip.dst_host contains "google" && http2.header.value ~ "/search?q="
+
+for stealth c application
+
+use 
+
+extern int __argc;    // Count of arguments
+extern char **__argv; // Array of arguments
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pCmdLine, int nCmdShow)
+{
+
+}
+
+and with building with clang, arg: -Wl,/subsystem:windows
+
+include <windows.h>
+for system calls: clang arg -lshell32 and ShellExecute(NULL, "open", "C:\\path\\to\\your\\executable.exe", NULL, NULL, SW_SHOW);
+
+#pragma comment(lib, "ws2_32.lib") to link libraries

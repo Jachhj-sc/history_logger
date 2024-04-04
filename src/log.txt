@@ -1,0 +1,2 @@
+Invalid argument
+Usage: ..\bins\stealth_get_active_network_adapter.exe [-o <output file>]
